@@ -9,3 +9,6 @@ Used Technologies:
 - MVVM
 - Clean Architecture
 - Timber
+
+# ![alt text](https://github.com/PanVova/Weather-App-Kotlin/blob/master/1)
+# ![alt text](https://github.com/PanVova/Weather-App-Kotlin/blob/master/2)
