@@ -3,22 +3,27 @@ package com.example.weatherapi.presentation.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.weatherapi.data.model.City
 import com.example.weatherapi.domain.useCase.GetWeatherCitiesUseCase
-import com.example.weatherapi.domain.useCase.GetWeatherCityUseCase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class SearchViewModel @Inject constructor(
     private val getWeatherCitiesUseCase: GetWeatherCitiesUseCase,
-    private val getWeatherCityUseCase: GetWeatherCityUseCase
 ) : ViewModel() {
 
-    private val _data = MutableLiveData<String>()
-    val data: LiveData<String> = _data
+    private val _data = MutableLiveData<List<City>>()
+    val data: LiveData<List<City>> = _data
 
-    init {
-
+    fun getCities(query: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = getWeatherCitiesUseCase.loadCities(query)
+            _data.postValue(result)
+        }
     }
 }
 
