@@ -8,8 +8,8 @@ import retrofit2.http.Query
 
 interface WeatherAPI {
     @GET("/api/location/search/?")
-    suspend fun getData(@Query("query") resourceName: String): List<City>
+    suspend fun getListOfCities(@Query("query") query: String): List<City>
 
     @GET("/api/location/{location_id}/")
-    suspend fun getCity(@Path("location_id") resourceName: Int): WeatherCity
+    suspend fun getCity(@Path("location_id") city: Int): WeatherCity
 }
