@@ -1,6 +1,8 @@
 package com.example.weatherapi.di
 
 import com.example.weatherapi.data.WeatherAPI
+import com.example.weatherapi.data.WeatherGatewayImpl
+import com.example.weatherapi.domain.gateway.WeatherGateway
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -39,5 +41,11 @@ class BasicModule {
     @Provides
     fun provideWeatherAPI(retrofit: Retrofit): WeatherAPI {
         return retrofit.create(WeatherAPI::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideWeatherGateway(weatherAPI: WeatherAPI): WeatherGateway {
+        return WeatherGatewayImpl(weatherAPI)
     }
 }
