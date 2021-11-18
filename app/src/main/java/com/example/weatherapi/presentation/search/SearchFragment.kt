@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapi.App
@@ -14,6 +15,8 @@ import com.example.weatherapi.R
 import com.example.weatherapi.data.model.City
 import com.example.weatherapi.databinding.FragmentSearchBinding
 import com.example.weatherapi.utils.Constants
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SearchFragment : Fragment() {
@@ -34,7 +37,6 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         App.component.inject(this)
-        subscribeLiveData()
         setupView()
         setupRecyclerView()
     }
@@ -57,7 +59,11 @@ class SearchFragment : Fragment() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
 
-            sendQuery.setOnClickListener { viewModel.getCities(searchCity.text.toString()) }
+            sendQuery.setOnClickListener {
+                lifecycleScope.launch {
+                    viewModel.getCities(searchCity.text.toString()).collect { onCitiesLoad(it) }
+                }
+            }
         }
     }
 
@@ -72,10 +78,6 @@ class SearchFragment : Fragment() {
                 adapter = searchAdapter
             }
         }
-    }
-
-    private fun subscribeLiveData() {
-        viewModel.data.observe(viewLifecycleOwner) { onCitiesLoad(it) }
     }
 
     private fun onCitiesLoad(list: List<City>) {

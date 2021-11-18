@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapi.App
 import com.example.weatherapi.data.model.WeatherCity
 import com.example.weatherapi.databinding.FragmentCityBinding
 import com.example.weatherapi.utils.Constants
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CityFragment : Fragment() {
@@ -30,14 +33,12 @@ class CityFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         App.component.inject(this)
-        subscribeLiveData()
         setupRecyclerView()
         val cityId = arguments?.getInt(Constants.CITY_ID)!!
-        viewModel.getCity(cityId)
-    }
 
-    private fun subscribeLiveData() {
-        viewModel.city.observe(viewLifecycleOwner) { onCityLoad(it) }
+        lifecycleScope.launch {
+            viewModel.getCity(cityId).collect { onCityLoad(it) }
+        }
     }
 
     private fun setupRecyclerView() {
