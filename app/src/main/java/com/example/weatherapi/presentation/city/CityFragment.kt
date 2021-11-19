@@ -34,10 +34,15 @@ class CityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         App.component.inject(this)
         setupRecyclerView()
+        setupObservers()
         val cityId = arguments?.getInt(Constants.CITY_ID)!!
 
-        lifecycleScope.launch {
-            viewModel.getCity(cityId).collect { onCityLoad(it) }
+        viewModel.getCity(cityId)
+    }
+
+    private fun setupObservers() {
+        viewModel.data.observe(viewLifecycleOwner){
+            onCityLoad(it)
         }
     }
 

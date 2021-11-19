@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapi.App
@@ -15,8 +14,6 @@ import com.example.weatherapi.R
 import com.example.weatherapi.data.model.City
 import com.example.weatherapi.databinding.FragmentSearchBinding
 import com.example.weatherapi.utils.Constants
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SearchFragment : Fragment() {
@@ -38,8 +35,10 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         App.component.inject(this)
         setupView()
+        setupObservers()
         setupRecyclerView()
     }
+
 
     private fun setupView() {
         with(binding) {
@@ -60,10 +59,14 @@ class SearchFragment : Fragment() {
             })
 
             sendQuery.setOnClickListener {
-                lifecycleScope.launch {
-                    viewModel.getCities(searchCity.text.toString()).collect { onCitiesLoad(it) }
-                }
+                viewModel.getCities(searchCity.text.toString())
             }
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.data.observe(viewLifecycleOwner) {
+            onCitiesLoad(it)
         }
     }
 

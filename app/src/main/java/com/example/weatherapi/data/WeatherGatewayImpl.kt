@@ -4,13 +4,14 @@ import com.example.weatherapi.data.model.City
 import com.example.weatherapi.data.model.WeatherCity
 import com.example.weatherapi.domain.gateway.WeatherGateway
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-class WeatherGatewayImpl(private val weatherAPI: WeatherAPI): WeatherGateway {
-    override suspend fun getListOfCities(query: String): List<City> {
-        return weatherAPI.getListOfCities(query)
+class WeatherGatewayImpl(private val weatherAPI: WeatherAPI) : WeatherGateway {
+    override fun getListOfCities(query: String): Flow<List<City>> {
+        return flow { emit(weatherAPI.getListOfCities(query)) }
     }
 
-    override suspend fun getCity(city: Int): WeatherCity {
-        return weatherAPI.getCity(city)
+    override fun getCity(city: Int): Flow<WeatherCity> {
+        return flow { emit(weatherAPI.getCity(city)) }
     }
 }
