@@ -17,13 +17,16 @@ import javax.inject.Singleton
 class BasicModule {
     @Singleton
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
-        val logging = HttpLoggingInterceptor()
-        logging.apply { level = HttpLoggingInterceptor.Level.BODY }
-
+    fun provideOkHttpClient(logging: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(logging)
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideLogging(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
     }
 
     @Singleton

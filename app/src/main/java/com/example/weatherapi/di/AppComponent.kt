@@ -8,12 +8,7 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-@Component(
-    modules = [
-        BasicModule::class,
-        UseCasesModule::class
-    ]
-)
+@Component(modules = [BasicModule::class])
 interface AppComponent {
     @Component.Builder
     interface Builder {
