@@ -7,23 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.weatherapi.App
 import com.example.weatherapi.R
 import com.example.weatherapi.databinding.FragmentSearchBinding
 import com.example.weatherapi.domain.model.City
 import com.example.weatherapi.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    @Inject
-    protected lateinit var viewModel: SearchViewModel
     private lateinit var binding: FragmentSearchBinding
     private lateinit var searchAdapter: SearchAdapter
+    private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,7 +85,6 @@ class SearchFragment : Fragment() {
     private fun onCitiesLoad(list: List<City>) {
         searchAdapter.setData(list)
     }
-
 
     private fun updateSearchText(text: String) {
         searchAdapter.updateSearchText(text)

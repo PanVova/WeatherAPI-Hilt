@@ -9,7 +9,7 @@ import com.example.weatherapi.databinding.WeatherDayItemBinding
 import com.example.weatherapi.domain.model.Day
 
 
-class CityAdapter() : RecyclerView.Adapter<CityAdapter.ViewHolder>() {
+class CityAdapter: RecyclerView.Adapter<CityAdapter.ViewHolder>() {
 
     private val days = mutableListOf<Day>()
 
