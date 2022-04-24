@@ -9,7 +9,7 @@ import com.example.weatherapi.domain.model.WeatherCity
 
 fun CityResponse.toDomain(): City {
     return City(
-        name = name,
+        name = title,
         lattLong = latt_long,
         id = woeid,
         locationType = location_type
@@ -18,11 +18,11 @@ fun CityResponse.toDomain(): City {
 
 fun DayResponse.toDomain(): Day {
     return Day(
-        weatherStateName,
-        weatherStateAbbr,
-        applicableDate,
-        minTemp,
-        maxTemp
+        weather_state_name,
+        weather_state_abbr,
+        applicable_date,
+        min_temp,
+        max_temp
     )
 }
 

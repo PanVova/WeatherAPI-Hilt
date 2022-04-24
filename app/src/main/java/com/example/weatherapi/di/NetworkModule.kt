@@ -1,5 +1,6 @@
 package com.example.weatherapi.di
 
+import com.example.weatherapi.BuildConfig
 import com.example.weatherapi.data.WeatherAPI
 import dagger.Module
 import dagger.Provides
@@ -29,7 +30,7 @@ class NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://www.metaweather.com")
+            .baseUrl(BuildConfig.API)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
