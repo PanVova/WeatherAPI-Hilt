@@ -1,4 +1,4 @@
-# Weather-App-Kotlin
+# Weather-App-Kotlin-Hilt (almost the same as WeatherApp)
 
 Android Kotlin application to read api from https://www.metaweather.com/ using Retrofit
 
