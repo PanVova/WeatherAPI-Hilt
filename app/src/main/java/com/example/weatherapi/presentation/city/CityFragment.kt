@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapi.App
-import com.example.weatherapi.data.model.WeatherCity
+import com.example.weatherapi.data.model.WeatherCityResponse
 import com.example.weatherapi.databinding.FragmentCityBinding
+import com.example.weatherapi.domain.model.WeatherCity
 import com.example.weatherapi.utils.Constants
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CityFragment : Fragment() {
@@ -56,6 +54,6 @@ class CityFragment : Fragment() {
 
     private fun onCityLoad(weatherCity: WeatherCity) {
         binding.cityName.text = weatherCity.title
-        cityAdapter.setData(weatherCity.consolidated_weather)
+        cityAdapter.setData(weatherCity.consolidatedWeather)
     }
 }

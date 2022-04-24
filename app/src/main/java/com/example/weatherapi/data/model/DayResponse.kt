@@ -2,7 +2,7 @@ package com.example.weatherapi.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Day(
+data class DayResponse(
     @SerializedName("weather_state_name")
     var weatherStateName: String,
 

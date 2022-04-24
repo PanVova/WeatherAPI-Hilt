@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapi.App
 import com.example.weatherapi.R
-import com.example.weatherapi.data.model.City
 import com.example.weatherapi.databinding.FragmentSearchBinding
+import com.example.weatherapi.domain.model.City
 import com.example.weatherapi.utils.Constants
 import javax.inject.Inject
 
@@ -25,7 +25,7 @@ class SearchFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -51,7 +51,7 @@ class SearchFragment : Fragment() {
                     s: CharSequence?,
                     start: Int,
                     count: Int,
-                    after: Int
+                    after: Int,
                 ) {
                 }
 
@@ -73,7 +73,7 @@ class SearchFragment : Fragment() {
     private fun setupRecyclerView() {
         with(binding) {
             searchAdapter = SearchAdapter() {
-                val bundle = Bundle().apply { putInt(Constants.CITY_ID, it.woeid) }
+                val bundle = Bundle().apply { putInt(Constants.CITY_ID, it.id) }
                 findNavController().navigate(R.id.searchFragment_cityFragment, bundle)
             }
             with(searchRecyclerView) {

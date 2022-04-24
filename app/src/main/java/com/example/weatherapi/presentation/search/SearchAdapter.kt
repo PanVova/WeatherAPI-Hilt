@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapi.R
-import com.example.weatherapi.data.model.City
 import com.example.weatherapi.databinding.SearchItemBinding
+import com.example.weatherapi.domain.model.City
 
 class SearchAdapter(private val clickListener: (City) -> Unit) :
     RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
