@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapi.domain.gateway.WeatherGateway
 import com.example.weatherapi.domain.model.City
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

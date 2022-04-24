@@ -11,8 +11,10 @@ import com.example.weatherapi.data.model.WeatherCityResponse
 import com.example.weatherapi.databinding.FragmentCityBinding
 import com.example.weatherapi.domain.model.WeatherCity
 import com.example.weatherapi.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class CityFragment : Fragment() {
 
     @Inject
@@ -30,11 +32,9 @@ class CityFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        App.component.inject(this)
         setupRecyclerView()
         setupObservers()
         val cityId = arguments?.getInt(Constants.CITY_ID)!!
-
         viewModel.getCity(cityId)
     }
 

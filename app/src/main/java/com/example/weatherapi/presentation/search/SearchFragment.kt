@@ -14,8 +14,10 @@ import com.example.weatherapi.R
 import com.example.weatherapi.databinding.FragmentSearchBinding
 import com.example.weatherapi.domain.model.City
 import com.example.weatherapi.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     @Inject
@@ -33,7 +35,6 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        App.component.inject(this)
         setupView()
         setupObservers()
         setupRecyclerView()
