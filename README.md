@@ -6,7 +6,7 @@ Used Technologies:
 - Retrofit (OkHTTP + GSON)
 - Coroutines
 - Flow
-- Dagger 2
+- Hilt
 - MVVM
 - Clean Architecture
 - Timber
