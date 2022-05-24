@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapi.databinding.FragmentCityBinding
 import com.example.weatherapi.domain.model.WeatherCity
 import com.example.weatherapi.utils.Constants
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class CityFragment : Fragment() {
 
     private lateinit var binding: FragmentCityBinding
@@ -20,8 +18,8 @@ class CityFragment : Fragment() {
     private val viewModel: CityViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCityBinding.inflate(layoutInflater, container, false)
         return binding.root

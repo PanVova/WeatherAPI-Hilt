@@ -10,22 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weatherapi.App
 import com.example.weatherapi.R
 import com.example.weatherapi.databinding.FragmentSearchBinding
+import com.example.weatherapi.di.AppComponent
 import com.example.weatherapi.domain.model.City
 import com.example.weatherapi.utils.Constants
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private lateinit var searchAdapter: SearchAdapter
+
     private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -47,10 +49,10 @@ class SearchFragment : Fragment() {
                 }
 
                 override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
                 ) {
                 }
 
