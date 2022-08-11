@@ -12,7 +12,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-@ContributesTo(AppComponent::class)
+@ContributesTo(AppScope::class)
 class NetworkModule {
     @Provides
     fun provideOkHttpClient(logging: HttpLoggingInterceptor): OkHttpClient {

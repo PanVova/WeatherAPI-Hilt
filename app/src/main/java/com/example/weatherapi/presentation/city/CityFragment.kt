@@ -5,17 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weatherapi.App
 import com.example.weatherapi.databinding.FragmentCityBinding
 import com.example.weatherapi.domain.model.WeatherCity
 import com.example.weatherapi.utils.Constants
+import javax.inject.Inject
 
 class CityFragment : Fragment() {
 
     private lateinit var binding: FragmentCityBinding
     private lateinit var cityAdapter: CityAdapter
-    private val viewModel: CityViewModel by viewModels()
+
+    @Inject
+    lateinit var viewModel: CityViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +30,7 @@ class CityFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        App.component.inject(this)
         setupRecyclerView()
         setupObservers()
         val cityId = arguments?.getInt(Constants.CITY_ID)!!

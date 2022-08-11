@@ -10,10 +10,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CityViewModel : ViewModel() {
-
-    @Inject
-    lateinit var gateway: WeatherGateway
+class CityViewModel @Inject constructor(
+    private val gateway: WeatherGateway
+) : ViewModel() {
 
     private val _data = MutableLiveData<WeatherCity>()
     val data: LiveData<WeatherCity> = _data

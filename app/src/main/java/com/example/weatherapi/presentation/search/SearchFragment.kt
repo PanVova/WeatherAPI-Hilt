@@ -13,17 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapi.App
 import com.example.weatherapi.R
 import com.example.weatherapi.databinding.FragmentSearchBinding
-import com.example.weatherapi.di.AppComponent
 import com.example.weatherapi.domain.model.City
 import com.example.weatherapi.utils.Constants
 import javax.inject.Inject
 
-class SearchFragment : Fragment() {
+class SearchFragment @Inject constructor(): Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private lateinit var searchAdapter: SearchAdapter
 
-    private val viewModel: SearchViewModel by viewModels()
+    @Inject
+    lateinit var viewModel: SearchViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +35,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        App.component.inject(this)
         setupView()
         setupObservers()
         setupRecyclerView()

@@ -12,10 +12,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-class SearchViewModel : ViewModel() {
-
-    @Inject
-    lateinit var gateway: WeatherGateway
+class SearchViewModel @Inject constructor(private val gateway: WeatherGateway) : ViewModel() {
     private val _data = MutableLiveData<List<City>>()
     val data: LiveData<List<City>> = _data
 
